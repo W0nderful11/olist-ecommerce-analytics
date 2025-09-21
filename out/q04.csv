@@ -1,0 +1,21 @@
+customer_id,customer_city,customer_state,orders_count,avg_order_value
+1617b1357756262bfa56ab541c47bc16,rio de janeiro,RJ,1,13664.08
+ec5b2ba62e574342386871631fafd3fc,vila velha,ES,1,7274.88
+c6e2731c5b391845f6800c97401a43a9,campo grande,MS,1,6929.31
+f48d464a0baaea338cb25f816991ab1f,vitoria,ES,1,6922.21
+3fd6777bbce08a352fddd04e4a7cc8f6,marilia,SP,1,6726.66
+05455dfa7cd02f13d132aa7a6a9729c6,divinopolis,MG,1,6081.54
+df55c14d1476a9a3467f131269c2477f,araruama,RJ,1,4950.34
+e0a2412720e9ea4f26c1ac985f6a7358,goiania,GO,1,4809.44
+24bbf5fd2f2e1b359ee7de94defc4a15,maua,SP,1,4764.34
+3d979689f636322c62418b6346b1c6d2,joao pessoa,PB,1,4681.78
+1afc82cd60e303ef09b4ef9837c9505c,sao paulo,SP,1,4513.32
+cc803a2c412833101651d3f90ca7de24,niteroi,RJ,1,4445.50
+926b6a6fb8b6081e00b335edaf578d35,brasilia,DF,1,4194.76
+35a413c7ca3c69756cb75867d6311c0d,bom jesus do galho,MG,1,4175.26
+e9b0d0eb3015ef1c9ce6cf5b9dcbee9f,nova lima,MG,1,4163.51
+3be2c536886b2ea4668eced3a80dd0bb,belem,PA,1,4042.74
+eb7a157e8da9c488cd4ddc48711f1097,jundiai,SP,1,4034.44
+c6695e3b1e48680db36b487419fb0398,sao paulo,SP,1,4016.91
+31e83c01fce824d0ff786fcd48dad009,rio de janeiro,RJ,1,3979.55
+addc91fdf9c2b3045497b57fc710e820,para de minas,MG,1,3826.80

@@ -1,0 +1,185 @@
+/Users/atembek.sh/PycharmProjects/aster_car_sales/.venv/lib/python3.10/site-packages/superset/config.py:51: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+logging was configured successfully
+2025-09-21 22:49:54,797:INFO:superset.utils.logging_configurator:logging was configured successfully
+2025-09-21 22:49:54,810:INFO:root:Configured event logger of type <class 'superset.utils.log.DBEventLogger'>
+We haven't found any Content Security Policy (CSP) defined in the configurations. Please make sure to configure CSP using the TALISMAN_ENABLED and TALISMAN_CONFIG keys or any other external software. Failing to configure CSP have serious security implications. Check https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP for more information. You can disable this warning using the CONTENT_SECURITY_POLICY_WARNING key.
+2025-09-21 22:49:54,810:WARNING:superset.initialization:We haven't found any Content Security Policy (CSP) defined in the configurations. Please make sure to configure CSP using the TALISMAN_ENABLED and TALISMAN_CONFIG keys or any other external software. Failing to configure CSP have serious security implications. Check https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP for more information. You can disable this warning using the CONTENT_SECURITY_POLICY_WARNING key.
+/Users/atembek.sh/PycharmProjects/aster_car_sales/.venv/lib/python3.10/site-packages/flask_limiter/extension.py:337: UserWarning: Using the in-memory storage for tracking rate limits as no storage was explicitly specified. This is not recommended for production use. See: https://flask-limiter.readthedocs.io#configuring-a-storage-backend for documentation about configuring the storage backend.
+  warnings.warn(
+/Users/atembek.sh/PycharmProjects/aster_car_sales/.venv/lib/python3.10/site-packages/flask_appbuilder/models/sqla/interface.py:64: SAWarning: relationship 'SqlaTable.slices' will copy column tables.id to column slices.datasource_id, which conflicts with relationship(s): 'Slice.table' (copies tables.id to slices.datasource_id). If this is not the intention, consider if these relationships should be linked with back_populates, or if viewonly=True should be applied to one or more if they are read-only. For the less common case that foreign key constraints are partially overlapping, the orm.foreign() annotation can be used to isolate the columns that should be written towards.   To silence this warning, add the parameter 'overlaps="table"' to the 'SqlaTable.slices' relationship. (Background on this error at: https://sqlalche.me/e/14/qzyx)
+  for prop in class_mapper(obj).iterate_properties:
+ * Serving Flask app 'superset'
+ * Debug mode: off
+2025-09-21 22:49:55,628:INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:8088
+2025-09-21 22:49:55,628:INFO:werkzeug:[33mPress CTRL+C to quit[0m
+2025-09-21 22:50:10,461:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:10] "[32mGET / HTTP/1.1[0m" 302 -
+Class 'werkzeug.local.LocalProxy' is not mapped
+2025-09-21 22:50:10,504:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:10] "[32mGET /superset/welcome/ HTTP/1.1[0m" 302 -
+2025-09-21 22:50:13,227:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /login/ HTTP/1.1" 200 -
+2025-09-21 22:50:13,295:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/appbuilder/css/fontawesome/solid.min.css HTTP/1.1" 200 -
+2025-09-21 22:50:13,300:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/appbuilder/css/fontawesome/regular.min.css HTTP/1.1" 200 -
+2025-09-21 22:50:13,302:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/appbuilder/css/fontawesome/v4-shims.min.css HTTP/1.1" 200 -
+2025-09-21 22:50:13,303:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/appbuilder/css/fontawesome/brands.min.css HTTP/1.1" 200 -
+2025-09-21 22:50:13,305:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/appbuilder/css/bootstrap-datepicker/bootstrap-datepicker3.min.css HTTP/1.1" 200 -
+2025-09-21 22:50:13,306:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/appbuilder/css/fontawesome/fontawesome.min.css HTTP/1.1" 200 -
+2025-09-21 22:50:13,309:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/appbuilder/css/bootstrap.min.css HTTP/1.1" 200 -
+2025-09-21 22:50:13,310:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/appbuilder/css/select2/select2.min.css HTTP/1.1" 200 -
+2025-09-21 22:50:13,312:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/appbuilder/css/select2/select2-bootstrap.min.css HTTP/1.1" 200 -
+2025-09-21 22:50:13,313:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/appbuilder/css/flags/flags16.css HTTP/1.1" 200 -
+2025-09-21 22:50:13,314:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/appbuilder/css/ab.css HTTP/1.1" 200 -
+2025-09-21 22:50:13,319:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/appbuilder/js/ab_filters.js HTTP/1.1" 200 -
+2025-09-21 22:50:13,320:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/appbuilder/js/ab_actions.js HTTP/1.1" 200 -
+2025-09-21 22:50:13,320:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/assets/images/superset-logo-horiz.png HTTP/1.1" 200 -
+2025-09-21 22:50:13,322:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/appbuilder/js/jquery-latest.js HTTP/1.1" 200 -
+2025-09-21 22:50:13,324:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/appbuilder/js/bootstrap.min.js HTTP/1.1" 200 -
+2025-09-21 22:50:13,326:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/assets/theme.85a201b44eb4c791ba1e.entry.css HTTP/1.1" 200 -
+2025-09-21 22:50:13,542:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/appbuilder/js/bootstrap-datepicker/bootstrap-datepicker.min.js HTTP/1.1" 200 -
+2025-09-21 22:50:13,558:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/assets/theme.85a201b44eb4c791ba1e.entry.js HTTP/1.1" 200 -
+2025-09-21 22:50:13,558:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/appbuilder/js/ab.js HTTP/1.1" 200 -
+2025-09-21 22:50:13,563:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/appbuilder/js/select2/select2.min.js HTTP/1.1" 200 -
+2025-09-21 22:50:13,566:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/assets/2450.3b69db705792b977f21f.entry.js HTTP/1.1" 200 -
+2025-09-21 22:50:13,568:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/assets/2318.37f87103f36c4a241f81.entry.js HTTP/1.1" 200 -
+2025-09-21 22:50:13,570:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/assets/preamble.15acfc1771c69eea159f.entry.js HTTP/1.1" 200 -
+2025-09-21 22:50:13,571:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/assets/8047.5e3652c44a57e31ed169.entry.js HTTP/1.1" 200 -
+2025-09-21 22:50:13,595:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/assets/7167.e4eb69c6899ea4caab27.entry.js HTTP/1.1" 200 -
+2025-09-21 22:50:13,596:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/assets/5755.49c32b0c08d84d9729b8.entry.js HTTP/1.1" 200 -
+2025-09-21 22:50:13,597:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/assets/8494.23c0da2cdd2ac2f1b463.entry.js HTTP/1.1" 200 -
+2025-09-21 22:50:13,603:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/assets/f8a10326828318d2245e.woff2 HTTP/1.1" 200 -
+2025-09-21 22:50:13,605:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/appbuilder/css/webfonts/fa-solid-900.woff2 HTTP/1.1" 200 -
+2025-09-21 22:50:13,609:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/assets/5010.3fb9b045eda07f0abf7c.entry.js HTTP/1.1" 200 -
+2025-09-21 22:50:13,610:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/assets/678.4fa1386c7aeeb1cacd8a.entry.js HTTP/1.1" 200 -
+2025-09-21 22:50:13,619:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/assets/8453.8a504cef172fd4d4fb46.entry.js HTTP/1.1" 200 -
+2025-09-21 22:50:13,621:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/assets/8888.bbbdf234b616cc4f5ef1.entry.js HTTP/1.1" 200 -
+2025-09-21 22:50:13,622:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/assets/9454.92d970abfa1ec9119fbf.entry.js HTTP/1.1" 200 -
+2025-09-21 22:50:13,628:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/assets/menu.64f3049b837a58e6614d.entry.js HTTP/1.1" 200 -
+2025-09-21 22:50:13,630:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/assets/7230.e08d502fc57663016542.entry.js HTTP/1.1" 200 -
+2025-09-21 22:50:13,631:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/assets/7243.eb13a437224caf9ae59a.entry.js HTTP/1.1" 200 -
+2025-09-21 22:50:13,651:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:13] "GET /static/assets/vendors.d43e1060c583584b42b0.entry.js HTTP/1.1" 200 -
+2025-09-21 22:50:14,295:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:14] "GET /static/assets/f5869088a4319a800ccb.chunk.js HTTP/1.1" 200 -
+2025-09-21 22:50:14,327:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:14] "GET /static/assets/images/favicon.png HTTP/1.1" 200 -
+2025-09-21 22:50:15,972:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:50:15] "GET /static/assets/3164eabdbb931859ae7c.woff2 HTTP/1.1" 200 -
+2025-09-21 22:53:57,896:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:53:57] "GET /health HTTP/1.1" 200 -
+2025-09-21 22:55:43,510:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:55:43] "GET /health HTTP/1.1" 200 -
+2025-09-21 22:55:52,709:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:55:52] "[32mGET / HTTP/1.1[0m" 302 -
+Class 'werkzeug.local.LocalProxy' is not mapped
+2025-09-21 22:55:52,731:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:55:52] "[32mGET /superset/welcome/ HTTP/1.1[0m" 302 -
+2025-09-21 22:55:52,779:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:55:52] "GET /login/ HTTP/1.1" 200 -
+2025-09-21 22:55:58,611:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:55:58] "[32mPOST /login/ HTTP/1.1[0m" 302 -
+2025-09-21 22:55:58,615:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:55:58] "[32mGET / HTTP/1.1[0m" 302 -
+2025-09-21 22:55:58,709:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:55:58] "GET /superset/welcome/ HTTP/1.1" 200 -
+2025-09-21 22:55:58,731:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:55:58] "GET /static/assets/spa.0ca4205204bb22564310.entry.css HTTP/1.1" 200 -
+2025-09-21 22:55:58,731:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:55:58] "GET /static/assets/images/loading.gif HTTP/1.1" 200 -
+HTTPException
+Traceback (most recent call last):
+  File "/Users/atembek.sh/PycharmProjects/aster_car_sales/.venv/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/atembek.sh/PycharmProjects/aster_car_sales/.venv/lib/python3.10/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/Users/atembek.sh/PycharmProjects/aster_car_sales/.venv/lib/python3.10/site-packages/flask/scaffold.py", line 331, in send_static_file
+    return send_from_directory(
+  File "/Users/atembek.sh/PycharmProjects/aster_car_sales/.venv/lib/python3.10/site-packages/flask/helpers.py", line 590, in send_from_directory
+    return werkzeug.utils.send_from_directory(  # type: ignore[return-value]
+  File "/Users/atembek.sh/PycharmProjects/aster_car_sales/.venv/lib/python3.10/site-packages/werkzeug/utils.py", line 574, in send_from_directory
+    raise NotFound()
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2025-09-21 22:55:58,727:WARNING:superset.views.base:HTTPException
+Traceback (most recent call last):
+  File "/Users/atembek.sh/PycharmProjects/aster_car_sales/.venv/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/atembek.sh/PycharmProjects/aster_car_sales/.venv/lib/python3.10/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/Users/atembek.sh/PycharmProjects/aster_car_sales/.venv/lib/python3.10/site-packages/flask/scaffold.py", line 331, in send_static_file
+    return send_from_directory(
+  File "/Users/atembek.sh/PycharmProjects/aster_car_sales/.venv/lib/python3.10/site-packages/flask/helpers.py", line 590, in send_from_directory
+    return werkzeug.utils.send_from_directory(  # type: ignore[return-value]
+  File "/Users/atembek.sh/PycharmProjects/aster_car_sales/.venv/lib/python3.10/site-packages/werkzeug/utils.py", line 574, in send_from_directory
+    raise NotFound()
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+HTTPException
+Traceback (most recent call last):
+  File "/Users/atembek.sh/PycharmProjects/aster_car_sales/.venv/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/atembek.sh/PycharmProjects/aster_car_sales/.venv/lib/python3.10/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/Users/atembek.sh/PycharmProjects/aster_car_sales/.venv/lib/python3.10/site-packages/flask/scaffold.py", line 331, in send_static_file
+    return send_from_directory(
+  File "/Users/atembek.sh/PycharmProjects/aster_car_sales/.venv/lib/python3.10/site-packages/flask/helpers.py", line 590, in send_from_directory
+    return werkzeug.utils.send_from_directory(  # type: ignore[return-value]
+  File "/Users/atembek.sh/PycharmProjects/aster_car_sales/.venv/lib/python3.10/site-packages/werkzeug/utils.py", line 574, in send_from_directory
+    raise NotFound()
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2025-09-21 22:55:58,729:WARNING:superset.views.base:HTTPException
+Traceback (most recent call last):
+  File "/Users/atembek.sh/PycharmProjects/aster_car_sales/.venv/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/atembek.sh/PycharmProjects/aster_car_sales/.venv/lib/python3.10/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/Users/atembek.sh/PycharmProjects/aster_car_sales/.venv/lib/python3.10/site-packages/flask/scaffold.py", line 331, in send_static_file
+    return send_from_directory(
+  File "/Users/atembek.sh/PycharmProjects/aster_car_sales/.venv/lib/python3.10/site-packages/flask/helpers.py", line 590, in send_from_directory
+    return werkzeug.utils.send_from_directory(  # type: ignore[return-value]
+  File "/Users/atembek.sh/PycharmProjects/aster_car_sales/.venv/lib/python3.10/site-packages/werkzeug/utils.py", line 574, in send_from_directory
+    raise NotFound()
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+HTTPException
+Traceback (most recent call last):
+  File "/Users/atembek.sh/PycharmProjects/aster_car_sales/.venv/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/atembek.sh/PycharmProjects/aster_car_sales/.venv/lib/python3.10/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/Users/atembek.sh/PycharmProjects/aster_car_sales/.venv/lib/python3.10/site-packages/flask/scaffold.py", line 331, in send_static_file
+    return send_from_directory(
+  File "/Users/atembek.sh/PycharmProjects/aster_car_sales/.venv/lib/python3.10/site-packages/flask/helpers.py", line 590, in send_from_directory
+    return werkzeug.utils.send_from_directory(  # type: ignore[return-value]
+  File "/Users/atembek.sh/PycharmProjects/aster_car_sales/.venv/lib/python3.10/site-packages/werkzeug/utils.py", line 574, in send_from_directory
+    raise NotFound()
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2025-09-21 22:55:58,729:WARNING:superset.views.base:HTTPException
+Traceback (most recent call last):
+  File "/Users/atembek.sh/PycharmProjects/aster_car_sales/.venv/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/atembek.sh/PycharmProjects/aster_car_sales/.venv/lib/python3.10/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/Users/atembek.sh/PycharmProjects/aster_car_sales/.venv/lib/python3.10/site-packages/flask/scaffold.py", line 331, in send_static_file
+    return send_from_directory(
+  File "/Users/atembek.sh/PycharmProjects/aster_car_sales/.venv/lib/python3.10/site-packages/flask/helpers.py", line 590, in send_from_directory
+    return werkzeug.utils.send_from_directory(  # type: ignore[return-value]
+  File "/Users/atembek.sh/PycharmProjects/aster_car_sales/.venv/lib/python3.10/site-packages/werkzeug/utils.py", line 574, in send_from_directory
+    raise NotFound()
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2025-09-21 22:55:58,734:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:55:58] "[33mGET /static/appbuilder/datepicker/bootstrap-datepicker.css HTTP/1.1[0m" 404 -
+2025-09-21 22:55:58,735:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:55:58] "[33mGET /static/appbuilder/select2/select2.css HTTP/1.1[0m" 404 -
+2025-09-21 22:55:58,735:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:55:58] "[33mGET /static/appbuilder/select2/select2-bootstrap-theme.css HTTP/1.1[0m" 404 -
+2025-09-21 22:55:58,769:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:55:58] "GET /static/assets/8767.e99bd9bd2f429864b6f0.entry.js HTTP/1.1" 200 -
+2025-09-21 22:55:58,769:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:55:58] "GET /static/assets/6140.ba157c2bc31cfc4db166.entry.js HTTP/1.1" 200 -
+2025-09-21 22:55:58,772:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:55:58] "GET /static/assets/thumbnail.f7f91866e420f4d9227b.entry.js HTTP/1.1" 200 -
+2025-09-21 22:55:58,774:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:55:58] "GET /static/assets/2087.d090220e75d89441b289.entry.js HTTP/1.1" 200 -
+2025-09-21 22:55:58,785:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:55:58] "GET /static/assets/6839.ae70978ec259eb357ed5.entry.js HTTP/1.1" 200 -
+2025-09-21 22:55:58,786:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:55:58] "GET /static/assets/5640.d16ad9020fbf76e46301.entry.js HTTP/1.1" 200 -
+2025-09-21 22:55:58,786:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:55:58] "GET /static/assets/8989.633f713fdcbeaf3ed8b4.entry.js HTTP/1.1" 200 -
+2025-09-21 22:55:58,788:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:55:58] "GET /static/assets/9772.25b06b5374ee1ca395bb.entry.js HTTP/1.1" 200 -
+2025-09-21 22:55:58,789:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:55:58] "GET /static/assets/9602.9823b4ffc1b5aed9ad5b.entry.js HTTP/1.1" 200 -
+2025-09-21 22:55:58,801:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:55:58] "GET /static/assets/4717.eafa532ff025caa5e11a.entry.js HTTP/1.1" 200 -
+2025-09-21 22:55:58,801:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:55:58] "GET /static/assets/spa.0ca4205204bb22564310.entry.js HTTP/1.1" 200 -
+2025-09-21 22:55:58,804:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:55:58] "GET /static/assets/DashboardPage.10d0997721b538892de2.entry.js HTTP/1.1" 200 -
+2025-09-21 22:55:58,809:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:55:58] "GET /static/assets/845.841ad39038c010354064.entry.js HTTP/1.1" 200 -
+2025-09-21 22:55:59,379:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:55:59] "GET /api/v1/log/recent_activity/1/?q=(page_size:6) HTTP/1.1" 200 -
+2025-09-21 22:55:59,380:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:55:59] "GET /api/v1/saved_query/?q=(filters:!((col:created_by,opr:rel_o_m,value:'1')),order_column:changed_on_delta_humanized,order_direction:desc,page:0,page_size:5) HTTP/1.1" 200 -
+2025-09-21 22:55:59,406:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:55:59] "GET /api/v1/database/?q=(filters:!((col:database_name,opr:neq,value:examples))) HTTP/1.1" 200 -
+2025-09-21 22:55:59,413:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:55:59] "GET /api/v1/dashboard/?q=(filters:!((col:owners,opr:rel_m_m,value:'1')),order_column:changed_on_delta_humanized,order_direction:desc,page:0,page_size:5) HTTP/1.1" 200 -
+2025-09-21 22:55:59,417:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:55:59] "GET /api/v1/database/?q=(filters:!((col:allow_file_upload,opr:upload_is_enabled,value:!t))) HTTP/1.1" 200 -
+2025-09-21 22:55:59,439:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:55:59] "GET /api/v1/chart/?q=(filters:!((col:owners,opr:rel_m_m,value:'1')),order_column:changed_on_delta_humanized,order_direction:desc,page:0,page_size:5) HTTP/1.1" 200 -
+2025-09-21 22:55:59,498:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:55:59] "GET /api/v1/chart/?q=(filters:!(),order_column:changed_on_delta_humanized,order_direction:desc,page:0,page_size:5) HTTP/1.1" 200 -
+2025-09-21 22:55:59,500:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:55:59] "GET /api/v1/dashboard/?q=(filters:!(),order_column:changed_on_delta_humanized,order_direction:desc,page:0,page_size:5) HTTP/1.1" 200 -
+2025-09-21 22:55:59,526:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:55:59] "GET /static/assets/images/empty-charts.svg HTTP/1.1" 200 -
+2025-09-21 22:55:59,531:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:55:59] "GET /static/assets/images/empty-dashboard.svg HTTP/1.1" 200 -
+2025-09-21 22:55:59,547:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:55:59] "GET /api/v1/dashboard/_info?q=(keys:!(permissions)) HTTP/1.1" 200 -
+2025-09-21 22:55:59,549:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:55:59] "GET /api/v1/chart/_info?q=(keys:!(permissions)) HTTP/1.1" 200 -
+2025-09-21 22:56:00,041:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:56:00] "POST /superset/log/?explode=events HTTP/1.1" 200 -
+2025-09-21 22:56:05,844:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:56:05] "GET /static/assets/images/union.svg HTTP/1.1" 200 -
+2025-09-21 22:58:41,098:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:58:41] "GET /api/v1/me/ HTTP/1.1" 200 -
+2025-09-21 22:59:00,506:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 22:59:00] "GET /api/v1/me/ HTTP/1.1" 200 -
+2025-09-21 23:13:23,687:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 23:13:23] "GET /api/v1/me/ HTTP/1.1" 200 -
+2025-09-21 23:37:39,273:INFO:werkzeug:127.0.0.1 - - [21/Sep/2025 23:37:39] "GET /api/v1/me/ HTTP/1.1" 200 -
