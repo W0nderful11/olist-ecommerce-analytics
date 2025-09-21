@@ -2,7 +2,7 @@
 
 I’m a data analyst at Olist. This repo builds a PostgreSQL database from the public Olist dataset, validates structures/relations, runs baseline checks, and executes 10+ analytical queries, printing results to the terminal (with optional CSV export).
 
-## Что внутри
+
 - `scripts/database_setup.py` — создание БД `olist_analytics` и схемы `olist`.
 - `import_olist.py` — полный ресет схемы, загрузка CSV Olist и внешние ключи.
 - `database/schema_overview.sql` — быстрый обзор типов колонок.
