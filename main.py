@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """
-Aster E‑Commerce Analytics (Olist) — основной скрипт
-Запускает набор SQL‑запросов против базы PostgreSQL `olist_analytics`.
+E Commerce Analytics (Olist) — основной скрипт
+Запускает набор SQL запросов против базы PostgreSQL `olist_analytics`.
 Выполняет 10+ аналитических запросов по заказам, товарам, оплатам и отзывам.
 """
 
 import argparse
+import os
 import csv
 import sys
 import time
@@ -112,11 +113,12 @@ def run_all(conn, args):
 
 def main():
     parser = argparse.ArgumentParser(description="Запуск аналитических запросов Olist и вывод/сохранение результатов.")
-    parser.add_argument("--host", default="localhost", help="DB host (default: localhost)")
-    parser.add_argument("--port", default="5432", help="DB port (default: 5432)")
-    parser.add_argument("--dbname", default="olist_analytics", help="Database name")
-    parser.add_argument("--user", default="postgres", help="DB user")
-    parser.add_argument("--password", default="postgres", help="DB password")
+    # Значения по умолчанию берём из переменных окружения PG*, а при их отсутствии — стандартные локальные
+    parser.add_argument("--host", default=os.environ.get("PGHOST", "localhost"), help="DB host (default: PGHOST or localhost)")
+    parser.add_argument("--port", default=os.environ.get("PGPORT", "5432"), help="DB port (default: PGPORT or 5432)")
+    parser.add_argument("--dbname", default=os.environ.get("PGDATABASE", "olist_analytics"), help="Database name (default: PGDATABASE or olist_analytics)")
+    parser.add_argument("--user", default=os.environ.get("PGUSER", "postgres"), help="DB user (default: PGUSER or postgres)")
+    parser.add_argument("--password", default=os.environ.get("PGPASSWORD", "postgres"), help="DB password (default: PGPASSWORD or postgres)")
     parser.add_argument("--save-csv", dest="save_csv", action="store_true", help="Save each result to CSV files")
     parser.add_argument("--csv-dir", dest="csv_dir", default="", help="Directory to save CSVs to (default: current dir)")
     parser.add_argument("--timeout", type=int, default=60, help="Statement timeout in seconds")

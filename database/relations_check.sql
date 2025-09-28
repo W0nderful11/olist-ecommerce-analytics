@@ -1,6 +1,6 @@
 -- Проверки связей (ER) для схемы olist
 
--- Анти-JOIN: отсутствующие ссылки (должно быть 0 во всех строках)
+-- Анти-JOIN: отсутствующие ссылки 
 SELECT 'orders->customers missing' AS check, COUNT(*)
 FROM olist.orders o LEFT JOIN olist.customers c ON c.customer_id=o.customer_id
 WHERE c.customer_id IS NULL;

@@ -1,6 +1,5 @@
--- Olist — 10 аналитических запросов
--- Файл содержит тематические запросы для проверки и аналитики.
--- Каждая секция начинается с комментария, объясняющего смысл.
+-- Olist 10 
+
 
 -- 1) GMV по штатам клиентов
 SELECT c.customer_state AS state,
@@ -22,13 +21,21 @@ GROUP BY category
 ORDER BY revenue DESC
 LIMIT 15;
 
--- 3) Месячная динамика GMV (12м)
-SELECT date_trunc('month', o.order_purchase_timestamp)::date AS month,
-       ROUND(SUM(oi.price + oi.freight_value)::NUMERIC,2) AS gmv
-FROM olist.orders o
-JOIN olist.order_items oi ON oi.order_id = o.order_id
-WHERE o.order_purchase_timestamp >= (current_date - INTERVAL '12 months')
-GROUP BY 1
+-- 3) Месячная динамика GMV (последние 12 месяцев от максимальной даты в данных)
+WITH last_month AS (
+  SELECT date_trunc('month', MAX(order_purchase_timestamp))::date AS mx
+  FROM olist.orders
+), monthly AS (
+  SELECT date_trunc('month', o.order_purchase_timestamp)::date AS month,
+         SUM(oi.price + oi.freight_value) AS gmv
+  FROM olist.orders o
+  JOIN olist.order_items oi ON oi.order_id = o.order_id
+  GROUP BY 1
+)
+SELECT m.month::date AS month,
+       ROUND(m.gmv::NUMERIC,2) AS gmv
+FROM monthly m, last_month lm
+WHERE m.month BETWEEN (lm.mx - INTERVAL '11 months') AND lm.mx
 ORDER BY 1;
 
 -- 4) Средний чек по клиентам (топ‑20)

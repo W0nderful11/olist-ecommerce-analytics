@@ -1,20 +1,21 @@
 #!/usr/bin/env python3
 """
-Aster E‑Commerce (Olist) — скрипт подготовки БД
+E Commerce (Olist) — скрипт подготовки БД
 Создаёт базу `olist_analytics`, схему `olist` (пустую) и проверяет подключение.
 """
 
+import os
 import psycopg2
 import sys
 import subprocess
 
 # Database configuration (по умолчанию для локального развития)
 DB_CONFIG = {
-    "host": "localhost",
-    "port": 5432,
-    "dbname": "olist_analytics",
-    "user": "postgres",
-    "password": "postgres"
+    "host": os.environ.get("PGHOST", "localhost"),
+    "port": int(os.environ.get("PGPORT", 5432)),
+    "dbname": os.environ.get("PGDATABASE", "olist_analytics"),
+    "user": os.environ.get("PGUSER", "postgres"),
+    "password": os.environ.get("PGPASSWORD", "postgres")
 }
 
 def run_sql_command(command, description):
@@ -106,7 +107,7 @@ def main():
         return False
     
     print("\n🎉 Database setup completed successfully!")
-    print("Next step: Run import_walmart_data.py to import data")
+    print("Next step: Run import_olist.py to import data")
     return True
 
 if __name__ == "__main__":

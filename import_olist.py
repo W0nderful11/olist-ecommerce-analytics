@@ -27,7 +27,7 @@ from typing import Dict
 
 try:
     import psycopg2
-except Exception as exc:  # pragma: no cover
+except Exception as exc:  
     print("Требуется psycopg2-binary. Установите: pip install psycopg2-binary", file=sys.stderr)
     raise
 
@@ -469,11 +469,11 @@ def validate_duplicates(cur):
 
 def main():
     parser = argparse.ArgumentParser(description="Импорт CSV Olist в PostgreSQL (схема olist)")
-    parser.add_argument("--host", default="localhost")
-    parser.add_argument("--port", default="5432")
-    parser.add_argument("--dbname", default="olist_analytics")
-    parser.add_argument("--user", default="postgres")
-    parser.add_argument("--password", default="postgres")
+    parser.add_argument("--host", default=os.environ.get("PGHOST", "localhost"))
+    parser.add_argument("--port", default=os.environ.get("PGPORT", "5432"))
+    parser.add_argument("--dbname", default=os.environ.get("PGDATABASE", "olist_analytics"))
+    parser.add_argument("--user", default=os.environ.get("PGUSER", "postgres"))
+    parser.add_argument("--password", default=os.environ.get("PGPASSWORD", "postgres"))
     parser.add_argument("--data-dir", required=True, help="Путь к каталогу с CSV Olist")
     args = parser.parse_args()
 

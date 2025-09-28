@@ -2,14 +2,19 @@
 
 I’m a data analyst at Olist. This repo builds a PostgreSQL database from the public Olist dataset, validates structures/relations, runs baseline checks, and executes 10+ analytical queries, printing results to the terminal (with optional CSV export).
 
-
-- `scripts/database_setup.py` — создание БД `olist_analytics` и схемы `olist`.
-- `import_olist.py` — полный ресет схемы, загрузка CSV Olist и внешние ключи.
-- `database/schema_overview.sql` — быстрый обзор типов колонок.
-- `database/relations_check.sql` — проверка связей (anti‑JOIN) и объёмы JOIN.
-- `database/checks.sql` — базовые проверки (LIMIT, WHERE/ORDER, GROUP BY, JOIN).
-- `database/queries.sql` — 11 аналитических запросов по теме e‑commerce.
-- `main.py` — универсальный запускатель SQL‑файлов, печать в терминал и экспорт в CSV.
+## Project files 
+- `scripts/database_setup.py` — create DB `olist_analytics` and schema `olist`.
+- `import_olist.py` — full schema reset, CSV load, and foreign keys.
+- `database/schema_overview.sql` — quick column types overview.
+- `database/relations_check.sql` — relationship checks (anti‑JOIN) and JOIN volumes.
+- `database/checks.sql` — baseline checks (LIMIT, WHERE/ORDER, GROUP BY, JOIN).
+- `database/queries.sql` — 11 analytical queries.
+- `main.py` — universal SQL runner, prints to terminal and optional CSV export.
+- `analytics.py` — 6 charts (2+ JOIN each), Excel export with formatting, Plotly time slider; default run builds all.
+- `demo.py` — short SQL‑only demo: insert one order_item for seller 'demo', then delete.
+- `charts/` — saved charts (images).
+- `exports/` — Excel exports.
+- `out/` — Plotly HTMLs and other outputs.
 
 ## ERD screenshots
 First (v2) and core flows used in the course deliverable:
@@ -38,12 +43,22 @@ PGPASSWORD=postgres psql -h localhost -p 5432 -U postgres -d olist_analytics -f 
 python3 main.py --dbname olist_analytics --user postgres --password postgres --sql-file database/checks.sql
 ```
 
-3) 10+ analytics (print results / optional CSV export)
+3) 10+ analytics
 ```bash
 # print
-python3 main.py --dbname olist_analytics --user postgres --password postgres --sql-file database/queries.sql
-# export CSVs
-python3 main.py --dbname olist_analytics --user postgres --password postgres --sql-file database/queries.sql --save-csv --csv-dir ./out
+python3 main.py
+```
+
+Install dependencies (once):
+```bash
+pip install -r requirements.txt
+```
+
+All charts are powered by SQL with 2+ JOINs, and the script prints a short report for each: rows count, chart type, and what it shows.
+
+Default run (no flags) now builds everything at once: 6 static charts, Excel export, and opens the interactive time slider.
+```bash
+python3 analytics.py
 ```
 
 ## Tools & data
