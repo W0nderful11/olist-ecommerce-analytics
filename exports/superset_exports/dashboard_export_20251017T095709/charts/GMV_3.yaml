@@ -1,0 +1,101 @@
+slice_name: "GMV \u043F\u043E \u0448\u0442\u0430\u0442\u0430\u043C"
+description: null
+certified_by: null
+certification_details: null
+viz_type: echarts_timeseries_bar
+params:
+  datasource: 2__table
+  viz_type: echarts_timeseries_bar
+  slice_id: 3
+  x_axis: state
+  xAxisForceCategorical: true
+  x_axis_sort: 'SUM(gmv)
+
+    '
+  x_axis_sort_asc: true
+  x_axis_sort_series: name
+  x_axis_sort_series_ascending: true
+  metrics:
+  - aggregate: null
+    column: null
+    datasourceWarning: false
+    expressionType: SQL
+    hasCustomLabel: false
+    label: 'SUM(gmv)
+
+      '
+    optionName: metric_xcay9jz2e0b_mm97dr79um
+    sqlExpression: 'SUM(gmv)
+
+      '
+  groupby: []
+  adhoc_filters: []
+  order_desc: true
+  row_limit: '20'
+  truncate_metric: true
+  show_empty_columns: true
+  comparison_type: values
+  annotation_layers: []
+  forecastPeriods: 10
+  forecastInterval: 0.8
+  orientation: vertical
+  x_axis_title: "\u0428\u0442\u0430\u0442"
+  x_axis_title_margin: 15
+  y_axis_title: GMV
+  y_axis_title_margin: 30
+  y_axis_title_position: Left
+  sort_series_type: sum
+  color_scheme: supersetColors
+  show_legend: true
+  legendType: scroll
+  legendOrientation: top
+  x_axis_time_format: smart_date
+  y_axis_format: SMART_NUMBER
+  y_axis_bounds:
+  - null
+  - null
+  truncateXAxis: true
+  rich_tooltip: true
+  showTooltipTotal: true
+  tooltipTimeFormat: smart_date
+  extra_form_data: {}
+  dashboards:
+  - 1
+  - 3
+query_context: "{\"datasource\":{\"id\":2,\"type\":\"table\"},\"force\":false,\"queries\"\
+  :[{\"filters\":[],\"extras\":{\"having\":\"\",\"where\":\"\"},\"applied_time_extras\"\
+  :{},\"columns\":[{\"columnType\":\"BASE_AXIS\",\"sqlExpression\":\"state\",\"label\"\
+  :\"state\",\"expressionType\":\"SQL\"}],\"metrics\":[{\"aggregate\":null,\"column\"\
+  :null,\"datasourceWarning\":false,\"expressionType\":\"SQL\",\"hasCustomLabel\"\
+  :false,\"label\":\"SUM(gmv)\\n\",\"optionName\":\"metric_xcay9jz2e0b_mm97dr79um\"\
+  ,\"sqlExpression\":\"SUM(gmv)\\n\"}],\"orderby\":[[{\"aggregate\":null,\"column\"\
+  :null,\"datasourceWarning\":false,\"expressionType\":\"SQL\",\"hasCustomLabel\"\
+  :false,\"label\":\"SUM(gmv)\\n\",\"optionName\":\"metric_xcay9jz2e0b_mm97dr79um\"\
+  ,\"sqlExpression\":\"SUM(gmv)\\n\"},false]],\"annotation_layers\":[],\"row_limit\"\
+  :20,\"series_columns\":[],\"series_limit\":0,\"order_desc\":true,\"url_params\"\
+  :{},\"custom_params\":{},\"custom_form_data\":{},\"time_offsets\":[],\"post_processing\"\
+  :[{\"operation\":\"pivot\",\"options\":{\"index\":[\"state\"],\"columns\":[],\"\
+  aggregates\":{\"SUM(gmv)\\n\":{\"operator\":\"mean\"}},\"drop_missing_columns\"\
+  :false}},{\"operation\":\"sort\",\"options\":{\"by\":\"SUM(gmv)\\n\",\"ascending\"\
+  :true}},{\"operation\":\"flatten\"}]}],\"form_data\":{\"datasource\":\"2__table\"\
+  ,\"viz_type\":\"echarts_timeseries_bar\",\"slice_id\":3,\"x_axis\":\"state\",\"\
+  xAxisForceCategorical\":true,\"x_axis_sort\":\"SUM(gmv)\\n\",\"x_axis_sort_asc\"\
+  :true,\"x_axis_sort_series\":\"name\",\"x_axis_sort_series_ascending\":true,\"metrics\"\
+  :[{\"aggregate\":null,\"column\":null,\"datasourceWarning\":false,\"expressionType\"\
+  :\"SQL\",\"hasCustomLabel\":false,\"label\":\"SUM(gmv)\\n\",\"optionName\":\"metric_xcay9jz2e0b_mm97dr79um\"\
+  ,\"sqlExpression\":\"SUM(gmv)\\n\"}],\"groupby\":[],\"adhoc_filters\":[],\"order_desc\"\
+  :true,\"row_limit\":\"20\",\"truncate_metric\":true,\"show_empty_columns\":true,\"\
+  comparison_type\":\"values\",\"annotation_layers\":[],\"forecastPeriods\":10,\"\
+  forecastInterval\":0.8,\"orientation\":\"vertical\",\"x_axis_title\":\"\u0428\u0442\
+  \u0430\u0442\",\"x_axis_title_margin\":15,\"y_axis_title\":\"GMV\",\"y_axis_title_margin\"\
+  :30,\"y_axis_title_position\":\"Left\",\"sort_series_type\":\"sum\",\"color_scheme\"\
+  :\"supersetColors\",\"show_legend\":true,\"legendType\":\"scroll\",\"legendOrientation\"\
+  :\"top\",\"x_axis_time_format\":\"smart_date\",\"y_axis_format\":\"SMART_NUMBER\"\
+  ,\"y_axis_bounds\":[null,null],\"truncateXAxis\":true,\"rich_tooltip\":true,\"showTooltipTotal\"\
+  :true,\"tooltipTimeFormat\":\"smart_date\",\"extra_form_data\":{},\"dashboards\"\
+  :[1,3],\"force\":false,\"result_format\":\"json\",\"result_type\":\"full\"},\"result_format\"\
+  :\"json\",\"result_type\":\"full\"}"
+cache_timeout: null
+uuid: 7413b783-b160-4f48-b880-8d243e737ce8
+version: 1.0.0
+dataset_uuid: d5065926-ab8f-4160-b99a-c34933b52ce3

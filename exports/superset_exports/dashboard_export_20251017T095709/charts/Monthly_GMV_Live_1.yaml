@@ -1,0 +1,101 @@
+slice_name: Monthly GMV (Live)
+description: null
+certified_by: null
+certification_details: null
+viz_type: echarts_timeseries_line
+params:
+  datasource: 1__table
+  viz_type: echarts_timeseries_line
+  slice_id: 1
+  x_axis: month
+  time_grain_sqla: P1M
+  x_axis_sort_asc: true
+  x_axis_sort_series: name
+  x_axis_sort_series_ascending: true
+  metrics:
+  - aggregate: null
+    column: null
+    datasourceWarning: false
+    expressionType: SQL
+    hasCustomLabel: false
+    label: 'SUM(gmv)
+
+      '
+    optionName: metric_aeukf1dpfpv_z6ewp1zap8k
+    sqlExpression: 'SUM(gmv)
+
+      '
+  groupby: []
+  adhoc_filters:
+  - clause: WHERE
+    comparator: No filter
+    expressionType: SIMPLE
+    operator: TEMPORAL_RANGE
+    subject: month
+  order_desc: true
+  row_limit: 10000
+  truncate_metric: true
+  show_empty_columns: true
+  comparison_type: values
+  annotation_layers: []
+  forecastPeriods: 10
+  forecastInterval: 0.8
+  x_axis_title: "\u041C\u0435\u0441\u044F\u0446"
+  x_axis_title_margin: 15
+  y_axis_title: GMV
+  y_axis_title_margin: 30
+  y_axis_title_position: Left
+  sort_series_type: sum
+  color_scheme: supersetColors
+  seriesType: line
+  show_legend: true
+  legendType: scroll
+  legendOrientation: top
+  x_axis_time_format: smart_date
+  rich_tooltip: true
+  showTooltipTotal: true
+  tooltipTimeFormat: smart_date
+  y_axis_format: SMART_NUMBER
+  truncateXAxis: true
+  extra_form_data: {}
+  dashboards:
+  - 1
+  - 3
+query_context: "{\"datasource\":{\"id\":1,\"type\":\"table\"},\"force\":false,\"queries\"\
+  :[{\"filters\":[{\"col\":\"month\",\"op\":\"TEMPORAL_RANGE\",\"val\":\"No filter\"\
+  }],\"extras\":{\"time_grain_sqla\":\"P1M\",\"having\":\"\",\"where\":\"\"},\"applied_time_extras\"\
+  :{},\"columns\":[{\"timeGrain\":\"P1M\",\"columnType\":\"BASE_AXIS\",\"sqlExpression\"\
+  :\"month\",\"label\":\"month\",\"expressionType\":\"SQL\"}],\"metrics\":[{\"aggregate\"\
+  :null,\"column\":null,\"datasourceWarning\":false,\"expressionType\":\"SQL\",\"\
+  hasCustomLabel\":false,\"label\":\"SUM(gmv)\\n\",\"optionName\":\"metric_aeukf1dpfpv_z6ewp1zap8k\"\
+  ,\"sqlExpression\":\"SUM(gmv)\\n\"}],\"orderby\":[[{\"aggregate\":null,\"column\"\
+  :null,\"datasourceWarning\":false,\"expressionType\":\"SQL\",\"hasCustomLabel\"\
+  :false,\"label\":\"SUM(gmv)\\n\",\"optionName\":\"metric_aeukf1dpfpv_z6ewp1zap8k\"\
+  ,\"sqlExpression\":\"SUM(gmv)\\n\"},false]],\"annotation_layers\":[],\"row_limit\"\
+  :10000,\"series_columns\":[],\"series_limit\":0,\"order_desc\":true,\"url_params\"\
+  :{},\"custom_params\":{},\"custom_form_data\":{},\"time_offsets\":[],\"post_processing\"\
+  :[{\"operation\":\"pivot\",\"options\":{\"index\":[\"month\"],\"columns\":[],\"\
+  aggregates\":{\"SUM(gmv)\\n\":{\"operator\":\"mean\"}},\"drop_missing_columns\"\
+  :false}},{\"operation\":\"flatten\"}]}],\"form_data\":{\"datasource\":\"1__table\"\
+  ,\"viz_type\":\"echarts_timeseries_line\",\"slice_id\":1,\"x_axis\":\"month\",\"\
+  time_grain_sqla\":\"P1M\",\"x_axis_sort_asc\":true,\"x_axis_sort_series\":\"name\"\
+  ,\"x_axis_sort_series_ascending\":true,\"metrics\":[{\"aggregate\":null,\"column\"\
+  :null,\"datasourceWarning\":false,\"expressionType\":\"SQL\",\"hasCustomLabel\"\
+  :false,\"label\":\"SUM(gmv)\\n\",\"optionName\":\"metric_aeukf1dpfpv_z6ewp1zap8k\"\
+  ,\"sqlExpression\":\"SUM(gmv)\\n\"}],\"groupby\":[],\"adhoc_filters\":[{\"clause\"\
+  :\"WHERE\",\"comparator\":\"No filter\",\"expressionType\":\"SIMPLE\",\"operator\"\
+  :\"TEMPORAL_RANGE\",\"subject\":\"month\"}],\"order_desc\":true,\"row_limit\":10000,\"\
+  truncate_metric\":true,\"show_empty_columns\":true,\"comparison_type\":\"values\"\
+  ,\"annotation_layers\":[],\"forecastPeriods\":10,\"forecastInterval\":0.8,\"x_axis_title\"\
+  :\"\u041C\u0435\u0441\u044F\u0446\",\"x_axis_title_margin\":15,\"y_axis_title\"\
+  :\"GMV\",\"y_axis_title_margin\":30,\"y_axis_title_position\":\"Left\",\"sort_series_type\"\
+  :\"sum\",\"color_scheme\":\"supersetColors\",\"seriesType\":\"line\",\"show_legend\"\
+  :true,\"legendType\":\"scroll\",\"legendOrientation\":\"top\",\"x_axis_time_format\"\
+  :\"smart_date\",\"rich_tooltip\":true,\"showTooltipTotal\":true,\"tooltipTimeFormat\"\
+  :\"smart_date\",\"y_axis_format\":\"SMART_NUMBER\",\"truncateXAxis\":true,\"extra_form_data\"\
+  :{},\"dashboards\":[1,3],\"force\":false,\"result_format\":\"json\",\"result_type\"\
+  :\"full\"},\"result_format\":\"json\",\"result_type\":\"full\"}"
+cache_timeout: null
+uuid: fdec92e4-b97c-444a-a05f-a66c1e34a149
+version: 1.0.0
+dataset_uuid: f0cb162a-5802-4f08-9d1b-0cc71330bb0f
