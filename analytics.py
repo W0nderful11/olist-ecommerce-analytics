@@ -378,8 +378,30 @@ def _import_plotly_or_reexec():
             return False
 
 
+def _open_existing_slider_html() -> bool:
+    """Если Plotly недоступен, но ранее сохранённый HTML существует — откроем его в браузере.
+    Возвращает True, если удалось открыть файл.
+    """
+    try:
+        out_dir = os.path.join(os.getcwd(), "out")
+        html_path = os.path.join(out_dir, "plotly_timeslider.html")
+        if os.path.exists(html_path):
+            import webbrowser
+            webbrowser.open(f"file://{html_path}")
+            print(f"Plotly не установлен — открыт сохранённый HTML: {html_path}")
+            return True
+        else:
+            print("Сохранённый HTML тайм‑ползунка не найден:", html_path)
+            return False
+    except Exception as e:
+        print("Не удалось открыть сохранённый HTML:", e)
+        return False
+
+
 def make_time_slider(conn) -> None:
     if not _import_plotly_or_reexec():
+        # Fallback: если Plotly нет — попробуем открыть уже сохранённый HTML
+        _open_existing_slider_html()
         return
     import plotly.express as px
     # Настроим рендерер так, чтобы график открылся в браузере, а также сохраним HTML
