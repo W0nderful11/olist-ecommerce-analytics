@@ -187,113 +187,212 @@ python3 scripts/export_monthly_gmv_snapshot.py
 
 All required code-side foundations for Assignment #3 are present. Proceed to build and style the dashboards in Superset and export them into `superset_exports/`.
 
-## Обзор задания №3 (надстройка Apache)
-
-Теперь этот репозиторий содержит вспомогательные скрипты и представления SQL для ускорения выполнения 15 задач задания №3 (промежуточного этапа). Ниже приведен контрольный список, показывающий, что уже реализовано в коде, а что необходимо выполнить вручную в интерфейсе надстройки.
-
-### Данные и оперативные вставки
-- [x] Базовая схема PostgreSQL + импорт данных (`scripts/database_setup.py `, `import_olist.py `).
-- [x] Прямая трансляция новых фактов (задача 2) — `scripts/auto_insert_stream.py" вставляет новые заказы + товары + платежи каждые N секунд (FK‑безопасные, значимые значения). Запустите его перед отображением информационных панелей:
-  ``bash
-python3 scripts/auto_insert_stream.py --интервал 8 --размер пакета 1
-  # или одиночный пакет
-  python3 scripts/auto_insert_stream.py --однократный --размер пакета 5
-  ```
-
-### Представления SQL для надмножества (основы заданий 5-9, 12-14)
-`database/superset_assignment3.sql` создает повторно используемые представления:
-- `olist.v_geo_customer_state` – центроиды для состояний (географическая точка/тепловая карта) (задача 5)
-- `olist.v_heatmap_category_state` – матрица GMV категории × состояния (Тепловая карта задачи 6)
-- `olist.v_sunburst_state_category_seller` – состояние иерархии → категория → продавец (задача 7 Sunburst)
-- `olist.v_treemap_category_state` – категория → GMV состояния для древовидной карты (задача 8)
-- `olist.v_wordcloud_category_frequency` – частоты для Word Cloud (задание 9)
-- `olist.v_order_totals_enriched` – включает нормализованное значение + метку сегмента (задачи 13 Нормализация, 14 Категоризация) — вы также можете воспроизвести с помощью пользовательского интерфейса вычисляемых столбцов, чтобы продемонстрировать оба подхода.
-- `olist.v_monthly_gmv_live` – динамический ежемесячный GMV (текущий источник задачи 10)
-- `olist.v_monthly_gmv_metrics` – предоставляет `gmv` и `prev_gmv` для показателей роста (задача 12)
-
-Примените их один раз после загрузки данных:
-``bash
-PGPASSWORD=postgres psql -h localhost -p 5432 -U postgres -d olist_analytics -f база данных/superset_assignment3.sql
-```
-
-### Статический снимок для задачи 10
-Создайте снимок в формате CSV, чтобы он отличался от изображения в реальном времени:
-``bash
-python3 scripts/export_monthly_gmv_snapshot.py
-```
-Загружает в файл `exports/superset/monthly_gmv_snapshot.csv`.
-В дополнительном наборе: Данные > Загрузить CSV (запрещено для необработанных таблиц в соответствии со спецификацией, но разрешено здесь как специально созданный дубликат для сравнения). Назовите набор данных, например, "monthly_gmv_snapshot" и постройте двухстрочный график (в режиме реального времени или моментального СНИМКА). Покажите расхождение, поскольку потоковый скрипт продолжает вставлять новые ордера.
-
-### Воспроизведение графиков (задача 4)
-Уже созданные в формате "analytics.py` (круг, столбец, вертикаль, линия, гистограмма, разброс). Перестройте аналоги в надмножестве, используя базовые таблицы или предоставленные представления. Убедитесь, что метки, заголовки и условные обозначения осей удобны для бизнеса (никаких необработанных идентификаторов без контекста).
-
-### Геовизуализация (задача 5)
-Используйте `v_geo_customer_state`. Настройте размер точки = клиенты, всплывающую подсказку с кодом состояния. При необходимости переключитесь на слой тепловой карты, если предпочтительнее визуализация плотности.
-
-### Тепловая карта (задача 6)
-Набор данных: `v_heatmap_category_state`. Строки = категория, столбцы = состояние, Метрика = СУММА(gmv) или КОЛИЧЕСТВО(элементов). При необходимости примените верхние фильтры.
-
-### Sunburst (задача 7)
-Набор данных: `v_sunburst_state_category_seller`. Уровни: customer_state > категория > идентификатор продавца_id. Показатель: СУММА(доход).
-
-### Древовидная карта (задача 8)
-Набор данных: `v_treemap_category_state`. Иерархия: категория > состояние. Значение: СУММА(gmv). Цвет: тот же показатель или другое измерение.
-
-### Облако слов (задание 9)
-Набор данных: `v_wordcloud_category_frequency`. Слово: категория; Метрика: частота.
-
-### Метрики (задача 12)
-В пользовательском интерфейсе надмножества (НЕ в исходном SQL):
-1. Среднее значение: AVG(gmv) (набор данных `v_monthly_gmv_live` или `v_monthly_gmv_metrics`).
-2. Медиана: ПРОЦЕНТИЛЬ(gmv, 0,5).
-3. Процент роста: (gmv - prev_gmv)/prev_gmv из `v_monthly_gmv_metrics` (задайте prev_gmv в качестве показателя или используйте пользовательскую формулу). Отобразите таблицу со средним значением и медианой для сравнения.
-
-### Вычисляемые столбцы и классификация (задачи 13, 14)
-Демонстрируем подход к пользовательскому интерфейсу, хотя в "v_order_totals_enriched" приведены примеры:
-- Формула нормализации (0-1): `(order_total - минимальный(order_total)) / (max(order_total) - минимальный(order_total))` с использованием вычисляемого столбца Superset.
-- Категоризация: ПРЕЦЕДЕНТНЫЕ или встроенные условия для создания сегментов (НИЗКИЙ/СРЕДНИЙ/ ВЫСОКИЙ/УЛЬТРА) при повторной реализации, а не при использовании представления.
-
-### Фильтры, детализация, перекрестная фильтрация (задача 11)
-- Добавьте собственные фильтры панели мониторинга: Диапазон дат (заказ покупки), категория, состояние, продавец.
-- Включите перекрестную фильтрацию в диаграммах (установите флажок в настройках взаимодействия с каждой диаграммой), чтобы при выборе категории или состояния другие диаграммы были более точными.
-- Детализация: настройте иерархические диаграммы (sunburst/treemap) и включите “детализацию до деталей” (или установите дополнительные уровни группировки, которые отображаются при нажатии).
-
-### Разработка информационных панелей (задача 3)
-Предлагаемые тематические информационные панели:
-1. Клиенты – гео, тепловая карта, показатели повторных покупок, распределение стоимости заказа.
-2. Продавцы и продукты – sunburst, древовидная карта, облако word, панель лучших продавцов, ежемесячная линейка GMV (со снимками в реальном времени).
-Обеспечьте согласованную цветовую палитру и удобочитаемые надписи (переименуйте исходные столбцы, например, "customer_state" → "Состояние клиента").
-
-### Экспорт панели мониторинга (задача 15)
-Экспортируйте JSON/YAML и зафиксируйте в "superset_exports/" (эта папка уже существует с заполнителем README).
-
-### Порядок представления (рекомендуется)
-1. Запустите прямую трансляцию: `python3 scripts/auto_insert_stream.py --интервал 8`.
-2. Откройте панель мониторинга с автоматическим обновлением (установите интервал обновления в дополнительном наборе равным 30 секундам или выполните демонстрацию обновления вручную).
-3. Покажите отклонение месячного графика в реальном времени от моментального снимка.
-4. Взаимодействие: тепловая карта с перекрестными фильтрами, древовидная карта, солнечные лучи.
-5. Выделите вычисляемые столбцы и различия в показателях (среднее значение по сравнению с медианой, нормализованное значение, сегменты).
-6. Укажите местоположение экспорта в формате JSON в репозитории.
-
-### Оставшиеся шаги вручную (не в коде)
-- Создание фактической диаграммы и ее стилизация в Superset (задачи 3-9, 11-15 на уровне визуализации).
-- Создание показателей и вычисляемых столбцов с помощью пользовательского интерфейса Superset (задачи 12-14) — код содержит ссылки, но вы должны создать их через интерфейс для определения критериев оценки.
-
-### Краткое описание команды
-``bash
-# Создание / сброс и загрузка данных
-python3 scripts/database_setup.py
-python3 import_olist.py --data-dir ./data
-
-# Создать представления для надмножества
-PGPASSWORD=postgres psql -h localhost -p 5432 -U postgres -d olist_analytics -f база данных/superset_assignment3.sql
-
-# Запустить текущие вставки (продолжить выполнение)
-python3 scripts/auto_insert_stream.py --интервал 8
-
-# Создать статический снимок (запустить один раз до или во время демонстрации)
-python3 scripts/export_monthly_gmv_snapshot.py
-```
-
 ---
-Все необходимые основы на стороне кода для выполнения задания №3 присутствуют. Приступайте к созданию и стилизации информационных панелей в Superset и экспортируйте их в `superset_exports/`.
+
+# Assignment #4: Prometheus and Grafana Monitoring Setup
+
+This project sets up a monitoring stack using Prometheus and Grafana with three dashboards: Database Exporter, Node Exporter, and Custom Exporter.
+
+## Prerequisites
+
+- Docker and Docker Compose installed
+- PostgreSQL database running (adjust connection in docker-compose.yml)
+- OpenWeather API key (sign up at https://openweathermap.org/api)
+
+## Setup Instructions
+
+1. **Clone or navigate to the project directory**
+
+2. **Set up environment variables**
+   Create a `.env` file in the root directory:
+   ```
+   OPENWEATHER_API_KEY=your_api_key_here
+   ```
+
+3. **Configure PostgreSQL connection**
+   In `docker-compose.yml`, update the `DATA_SOURCE_NAME` for postgres_exporter to match your PostgreSQL setup:
+   ```
+   DATA_SOURCE_NAME=postgresql://username:password@host:port/database?sslmode=disable
+   ```
+   For local PostgreSQL, use `host.docker.internal` if on macOS/Windows.
+
+4. **Build and run the monitoring stack**
+   ```bash
+   docker-compose up --build
+   ```
+
+5. **Access the services**
+   - Prometheus: http://localhost:9090 
+   - Grafana: http://localhost:3000 (admin/admin)
+   - PostgreSQL Exporter: http://localhost:9187
+   - Node Exporter: http://localhost:9100
+   - Custom Exporter: http://localhost:8000
+
+## Dashboards
+
+### Database Exporter Dashboard
+Monitors PostgreSQL database metrics.
+
+### Node Exporter Dashboard
+Monitors system resources (CPU, memory, disk, network).
+
+### Custom Exporter Dashboard
+Collects weather data from OpenWeather API.
+
+## PromQL Queries
+
+### Database Exporter (10 queries)
+1. `pg_stat_database_blks_hit / (pg_stat_database_blks_hit + pg_stat_database_blks_read) * 100` - Cache hit ratio
+2. `rate(pg_stat_database_tup_fetched[5m])` - Tuple fetch rate
+3. `pg_stat_database_numbackends` - Active connections
+4. `pg_database_size_bytes / 1024 / 1024 / 1024` - Database size in GB
+5. `time() - pg_postmaster_start_time_seconds` - Uptime in seconds
+6. `rate(pg_stat_database_xact_commit[5m])` - Transaction commit rate
+7. `rate(pg_stat_database_xact_rollback[5m])` - Transaction rollback rate
+8. `pg_stat_user_tables_n_tup_ins` - Total inserts
+9. `pg_stat_user_tables_n_tup_upd` - Total updates
+10. `pg_stat_user_tables_n_tup_del` - Total deletes
+
+### Node Exporter (10 queries)
+1. `100 - (avg by (instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100)` - CPU usage %
+2. `node_load1` - Load average 1m
+3. `node_memory_MemTotal_bytes / 1024 / 1024 / 1024` - Total memory GB
+4. `node_memory_MemAvailable_bytes / 1024 / 1024 / 1024` - Available memory GB
+5. `node_memory_SwapTotal_bytes / 1024 / 1024 / 1024` - Total swap GB (replacement for disk, as filesystem collector doesn't work on macOS)
+6. `rate(node_disk_read_bytes_total[5m])` - Disk read rate bytes/sec
+7. `rate(node_network_receive_bytes_total[5m]) * 8 / 1000000` - Network receive Mbit/sec
+8. `node_timex_frequency_adjustment_ratio` - Frequency adjustment ratio (replacement for temperature, as hwmon doesn't work on macOS)
+9. `node_procs_blocked` - Blocked processes (replacement for battery, as battery collector doesn't work on macOS)
+10. `node_procs_running` - Running processes
+
+### Custom Exporter (10 queries)
+1. `weather_temperature_celsius` - Current temperature
+2. `weather_humidity_percent` - Current humidity
+3. `weather_pressure_hpa` - Current pressure
+4. `weather_wind_speed_ms` - Wind speed
+5. `weather_wind_direction_degrees` - Wind direction
+6. `weather_visibility_meters` - Visibility
+7. `weather_clouds_percent` - Cloud coverage
+8. `weather_rain_1h_mm` - Rain in last hour
+9. `weather_snow_1h_mm` - Snow in last hour
+10. `rate(weather_api_calls_total[5m])` - API call rate
+
+## Grafana Dashboards
+
+Import the JSON files from the `grafana/dashboards/` directory into Grafana.
+
+## Alerts
+
+Configure alerts in Grafana for each dashboard as per requirements.
+
+## Notes
+
+- Ensure PostgreSQL is accessible from the Docker network
+- For macOS, use `host.docker.internal` for host connections
+- Metrics collection should run for 1-5 hours as required
+- All exporters must show "UP" in Prometheus targets
+---
+
+
+# Задание №4: Настройка мониторинга Prometheus и Grafana
+
+В этом проекте настраивается стек мониторинга с использованием Prometheus и Grafana с тремя информационными панелями: Экспортер базы данных, экспортер узлов и пользовательский экспортер.
+
+## Предварительные требования
+
+- Установлены Docker и Docker Compose
+- Запущена база данных PostgreSQL (настройте подключение в docker-compose.yml)
+- Ключ API OpenWeather (зарегистрируйтесь по адресу https://openweathermap.org/api)
+
+## Инструкции по настройке
+
+1. **Клонировать или перейти в каталог проекта**
+
+2. **Настроить переменные среды**
+   Создайте файл `.env` в корневом каталоге:
+   ```
+   OPENWEATHER_API_KEY=ваш_api_key_ здесь
+   ```
+
+3. **Настройте подключение к PostgreSQL**
+   В `docker-compose.yml` обновите `DATA_SOURCE_NAME` для postgres_exporter, чтобы оно соответствовало вашим настройкам PostgreSQL:
+   ```
+   DATA_SOURCE_NAME=postgresql://username:password@host:port/database?sslmode=disable
+   ```
+   Для локального PostgreSQL используйте `host.docker.internal`, если он установлен на macOS/Windows.
+
+4. **Создайте и запустите стек мониторинга**
+   ``bash
+docker-compose up -сборка
+   ```
+
+5. **Доступ к сервисам**
+   - Прометей: http://localhost:9090 (Prometheus)
+   - Графана: http://localhost:3000 (Grafana)
+   - Экспортер PostgreSQL: http://localhost:9187  (DB)  - должны быть метрики pg_stat_database_numbackends.
+   - Экспортер узлов: http://localhost:9100 (Node) — метрики node_cpu_seconds_total
+   - Пользовательский экспортер: http://localhost:8000 (Custom) — метрики  weather_temperature_celsius.
+
+## Информационные панели
+
+### Панель экспортера баз данных
+Отслеживает показатели базы данных PostgreSQL.
+
+### Панель экспортера узлов
+Отслеживает системные ресурсы (процессор, память, диск, сеть).
+
+### Панель пользовательского экспортера
+Собирает данные о погоде с помощью OpenWeather API.
+
+## Запросы PromQL
+
+### Экспорт базы данных (10 запросов)
+1. `pg_stat_database_blks_hit / (pg_stat_database_blks_hit + pg_stat_database_blks_read) * 100` - Коэффициент попадания в кэш
+2. `rate(pg_stat_database_tup_fetched[5m])` - Скорость выборки кортежей
+3. `avg_over_time(pg_stat_database_numbackends[5m])` - Среднее активных соединений за 5 мин
+4. `avg_over_time(pg_database_size_bytes[5m]) / 1024 / 1024 / 1024` - Средний размер базы данных в ГБ за 5 мин
+5. `up{job="postgres_exporter"}` - Статус экспортера (1=UP, 0=DOWN; используйте вместо uptime, если pg_postmaster_start_time_seconds пустой)
+6. `rate(pg_stat_database_xact_commit[5m])` - Скорость фиксации транзакции
+7. `avg_over_time(pg_stat_database_xact_rollback[5m])` - Среднее количество откатов за 5 мин (используйте avg_over_time для gauge-метрики)
+8. `avg_over_time(pg_stat_user_tables_n_tup_ins[5m])` - Среднее количество вставок за 5 мин (используйте avg_over_time для gauge-метрики)
+9. `avg_over_time(pg_stat_user_tables_n_tup_upd[5m])` - Среднее количество обновлений за 5 мин (используйте avg_over_time для gauge-метрики)
+10. `avg_over_time(pg_stat_user_tables_n_tup_del[5m])` - Среднее количество удалений за 5 мин (используйте avg_over_time для gauge-метрики)
+
+### Экспортер узлов (10 запросов)
+1. `100 - (avg by (instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100)` - Загрузка процессора %
+2. `avg_over_time(node_load1[5m])` - Средняя загрузка за 5 мин
+3. `avg_over_time(node_memory_MemTotal_bytes[5m]) / 1024 / 1024 / 1024` - Средний общий объем памяти в ГБ за 5 мин
+4. `avg_over_time(node_memory_MemAvailable_bytes[5m]) / 1024 / 1024 / 1024` - Средний объем доступной памяти в ГБ за 5 мин
+5. `avg_over_time(node_memory_SwapTotal_bytes[5m]) / 1024 / 1024 / 1024` - Средний общий объем swap в ГБ за 5 мин (замена для диска, так как filesystem collector не работает на macOS)
+6. `rate(node_disk_read_bytes_total[5m])` - скорость чтения с диска, байт/сек
+7. `rate(node_network_receive_bytes_total[5m]) * 8 / 1000000` - скорость приема по сети Мбит/с
+8. `avg_over_time(node_timex_frequency_adjustment_ratio[5m])` - Среднее соотношение корректировки частоты за 5 мин (замена для температуры, так как hwmon не работает на macOS)
+9. `avg_over_time(node_procs_blocked[5m])` - Среднее количество заблокированных процессов за 5 мин (замена для батареи, так как battery collector не работает на macOS)
+10. `avg_over_time(node_procs_running[5m])` - Среднее количество запущенных процессов за 5 мин
+
+### Пользовательский экспортер (10 запросов)
+1. `avg_over_time(weather_temperature_celsius[5m])` - Средняя температура за 5 мин
+2. `avg_over_time(weather_humidity_percent[5m])` - Средняя влажность за 5 мин
+3. `avg_over_time(weather_pressure_hpa[5m])` - Среднее давление за 5 мин
+4. `avg_over_time(weather_wind_speed_ms[5m])` - Средняя скорость ветра за 5 мин
+5. `avg_over_time(weather_wind_direction_degrees[5m])` - Среднее направление ветра за 5 мин
+6. `avg_over_time(weather_visibility_meters[5m])` - Средняя видимость за 5 мин
+7. `avg_over_time(weather_clouds_percent[5m])` - Средняя облачность за 5 мин
+8. `avg_over_time(weather_rain_1h_mm[5m])` - Средний дождь за 5 мин
+9. `avg_over_time(weather_snow_1h_mm[5m])` - Средний снег за 5 мин
+10. `rate(weather_api_calls_total[5m])` - частота вызовов API
+
+## Панели мониторинга Grafana
+
+Импортируйте файлы JSON из каталога `grafana/dashboards/` в Grafana.
+
+## Оповещения
+
+Настройте оповещения в Grafana для каждой панели мониторинга в соответствии с требованиями.
+
+## Примечания
+
+- Убедитесь, что PostgreSQL доступен из сети Docker
+- Для macOS используйте "host.docker.internal" для подключения к хосту
+- Сбор показателей должен выполняться в течение 1-5 часов по мере необходимости
+- Все экспортеры должны быть указаны "НА месте" в целях Prometheus

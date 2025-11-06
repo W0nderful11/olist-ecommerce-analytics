@@ -1,0 +1,263 @@
+{
+  "id": null,
+  "uid": "monitoring-dashboard",
+  "title": "Мониторинг Погоды",
+  "tags": ["monitoring", "prometheus", "grafana"],
+  "timezone": "browser",
+  "panels": [
+    {
+      "id": 1,
+      "title": "Температура (°C)",
+      "type": "graph",
+      "targets": [
+        {
+          "expr": "weather_temperature_celsius{instance=~\"$instance\"}",
+          "legendFormat": "Температура"
+        }
+      ],
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0}
+    },
+    {
+      "id": 2,
+      "title": "Влажность (%)",
+      "type": "graph",
+      "targets": [
+        {
+          "expr": "weather_humidity_percent{instance=~\"$instance\"}",
+          "legendFormat": "Влажность"
+        }
+      ],
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0}
+    },
+    {
+      "id": 3,
+      "title": "Давление (hPa)",
+      "type": "gauge",
+      "targets": [
+        {
+          "expr": "weather_pressure_hpa{instance=~\"$instance\"}",
+          "legendFormat": "Давление"
+        }
+      ],
+      "gridPos": {"h": 8, "w": 8, "x": 0, "y": 8}
+    },
+    {
+      "id": 4,
+      "title": "Скорость ветра (м/с)",
+      "type": "graph",
+      "targets": [
+        {
+          "expr": "weather_wind_speed_ms{instance=~\"$instance\"}",
+          "legendFormat": "Ветер"
+        }
+      ],
+      "gridPos": {"h": 8, "w": 8, "x": 8, "y": 8}
+    },
+    {
+      "id": 5,
+      "title": "Облачность (%)",
+      "type": "barchart",
+      "targets": [
+        {
+          "expr": "weather_clouds_percent{instance=~\"$instance\"}",
+          "legendFormat": "Облачность"
+        }
+      ],
+      "gridPos": {"h": 8, "w": 8, "x": 16, "y": 8}
+    },
+    {
+      "id": 6,
+      "title": "Загрузка CPU (%)",
+      "type": "graph",
+      "targets": [
+        {
+          "expr": "100 - (avg by (instance) (irate(node_cpu_seconds_total{mode=\"idle\", instance=~\"$instance\"}[5m])) * 100)",
+          "legendFormat": "CPU"
+        }
+      ],
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 16}
+    },
+    {
+      "id": 7,
+      "title": "Использование памяти (GB)",
+      "type": "graph",
+      "targets": [
+        {
+          "expr": "(node_memory_MemTotal_bytes{instance=~\"$instance\"} - node_memory_MemAvailable_bytes{instance=~\"$instance\"}) / 1024 / 1024 / 1024",
+          "legendFormat": "Память"
+        }
+      ],
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 16}
+    },
+    {
+      "id": 8,
+      "title": "Загрузка системы (Load Average)",
+      "type": "gauge",
+      "targets": [
+        {
+          "expr": "node_load1{instance=~\"$instance\"}",
+          "legendFormat": "Load 1m"
+        }
+      ],
+      "gridPos": {"h": 8, "w": 8, "x": 0, "y": 24}
+    },
+    {
+      "id": 9,
+      "title": "Сеть: Прием (Mbit/s)",
+      "type": "graph",
+      "targets": [
+        {
+          "expr": "rate(node_network_receive_bytes_total{instance=~\"$instance\"}[5m]) * 8 / 1000000",
+          "legendFormat": "Прием"
+        }
+      ],
+      "gridPos": {"h": 8, "w": 8, "x": 8, "y": 24}
+    },
+    {
+      "id": 10,
+      "title": "Коэффициент попадания в кэш (%)",
+      "type": "graph",
+      "targets": [
+        {
+          "expr": "pg_stat_database_blks_hit{instance=~\"$instance\"} / (pg_stat_database_blks_hit{instance=~\"$instance\"} + pg_stat_database_blks_read{instance=~\"$instance\"}) * 100",
+          "legendFormat": "Кэш"
+        }
+      ],
+      "gridPos": {"h": 8, "w": 8, "x": 16, "y": 24}
+    },
+    {
+      "id": 11,
+      "title": "Активные соединения",
+      "type": "barchart",
+      "targets": [
+        {
+          "expr": "pg_stat_database_numbackends{instance=~\"$instance\"}",
+          "legendFormat": "Соединения"
+        }
+      ],
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 32}
+    },
+    {
+      "id": 12,
+      "title": "Размер БД (GB)",
+      "type": "gauge",
+      "targets": [
+        {
+          "expr": "pg_database_size_bytes{instance=~\"$instance\"} / 1024 / 1024 / 1024",
+          "legendFormat": "Размер"
+        }
+      ],
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 32}
+    },
+    {
+      "id": 13,
+      "title": "Частота вызовов API",
+      "type": "graph",
+      "targets": [
+        {
+          "expr": "rate(weather_api_calls_total{instance=~\"$instance\"}[5m])",
+          "legendFormat": "API"
+        }
+      ],
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 40}
+    },
+    {
+      "id": 14,
+      "title": "Тепловая карта CPU",
+      "type": "heatmap",
+      "targets": [
+        {
+          "expr": "100 - (avg by (cpu) (irate(node_cpu_seconds_total{mode=\"idle\", instance=~\"$instance\"}[5m])) * 100)",
+          "legendFormat": "CPU {{cpu}}"
+        }
+      ],
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 40}
+    }
+  ],
+  "time": {"from": "now-1h", "to": "now"},
+  "timepicker": {},
+  "templating": {
+    "list": [
+      {
+        "name": "instance",
+        "type": "query",
+        "query": "label_values(instance)",
+        "label": "Instance",
+        "multi": true,
+        "includeAll": true,
+        "allValue": ".*"
+      }
+    ]
+  },
+  "annotations": {
+    "list": [
+      {
+        "name": "Высокая загрузка CPU",
+        "datasource": "Prometheus",
+        "expr": "100 - (avg by (instance) (irate(node_cpu_seconds_total{mode=\"idle\"}[5m])) * 100) > 80",
+        "titleFormat": "Высокая загрузка CPU",
+        "textFormat": "Загрузка CPU выше 80%"
+      },
+      {
+        "name": "Низкий уровень памяти",
+        "datasource": "Prometheus",
+        "expr": "node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes < 0.1",
+        "titleFormat": "Низкий уровень памяти",
+        "textFormat": "Доступная память ниже 10%"
+      },
+      {
+        "name": "Высокая загрузка системы",
+        "datasource": "Prometheus",
+        "expr": "node_load1 > 2",
+        "titleFormat": "Высокая загрузка системы",
+        "textFormat": "Load Average выше 2"
+      },
+      {
+        "name": "Много соединений с БД",
+        "datasource": "Prometheus",
+        "expr": "pg_stat_database_numbackends > 10",
+        "titleFormat": "Много соединений с БД",
+        "textFormat": "Активных соединений больше 10"
+      },
+      {
+        "name": "Низкий хит кэша БД",
+        "datasource": "Prometheus",
+        "expr": "pg_stat_database_blks_hit / (pg_stat_database_blks_hit + pg_stat_database_blks_read) * 100 < 90",
+        "titleFormat": "Низкий хит кэша БД",
+        "textFormat": "Коэффициент попадания в кэш ниже 90%"
+      },
+      {
+        "name": "БД недоступна",
+        "datasource": "Prometheus",
+        "expr": "up{job=\"postgres_exporter\"} == 0",
+        "titleFormat": "БД недоступна",
+        "textFormat": "PostgreSQL экспортер не отвечает"
+      },
+      {
+        "name": "Высокая температура",
+        "datasource": "Prometheus",
+        "expr": "weather_temperature_celsius > 30",
+        "titleFormat": "Высокая температура",
+        "textFormat": "Температура выше 30°C"
+      },
+      {
+        "name": "Высокая влажность",
+        "datasource": "Prometheus",
+        "expr": "weather_humidity_percent > 90",
+        "titleFormat": "Высокая влажность",
+        "textFormat": "Влажность выше 90%"
+      },
+      {
+        "name": "Высокая частота API",
+        "datasource": "Prometheus",
+        "expr": "rate(weather_api_calls_total[5m]) > 1",
+        "titleFormat": "Высокая частота API",
+        "textFormat": "Частота вызовов API выше 1 в минуту"
+      }
+    ]
+  },
+  "refresh": "5s",
+  "schemaVersion": 27,
+  "version": 1,
+  "links": []
+}

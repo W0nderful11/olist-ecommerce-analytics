@@ -1,0 +1,95 @@
+{
+  "id": null,
+  "uid": "database-dashboard",
+  "title": "Мониторинг Базы Данных",
+  "tags": ["database", "postgresql"],
+  "timezone": "browser",
+  "panels": [
+    {
+      "id": 1,
+      "title": "Активные соединения",
+      "type": "graph",
+      "targets": [
+        {
+          "expr": "pg_stat_database_numbackends",
+          "legendFormat": "{{datname}}"
+        }
+      ],
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0}
+    },
+    {
+      "id": 2,
+      "title": "Размер БД (GB)",
+      "type": "graph",
+      "targets": [
+        {
+          "expr": "pg_database_size_bytes / 1024 / 1024 / 1024",
+          "legendFormat": "{{datname}}"
+        }
+      ],
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0}
+    },
+    {
+      "id": 3,
+      "title": "Коэффициент попадания в кэш (%)",
+      "type": "gauge",
+      "targets": [
+        {
+          "expr": "pg_stat_database_blks_hit / (pg_stat_database_blks_hit + pg_stat_database_blks_read) * 100",
+          "legendFormat": "Кэш"
+        }
+      ],
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 8}
+    },
+    {
+      "id": 4,
+      "title": "Скорость транзакций",
+      "type": "barchart",
+      "targets": [
+        {
+          "expr": "rate(pg_stat_database_xact_commit[5m])",
+          "legendFormat": "Commit"
+        },
+        {
+          "expr": "rate(pg_stat_database_xact_rollback[5m])",
+          "legendFormat": "Rollback"
+        }
+      ],
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 8}
+    }
+  ],
+  "time": {"from": "now-1h", "to": "now"},
+  "timepicker": {},
+  "templating": {
+    "list": []
+  },
+  "annotations": {
+    "list": [
+      {
+        "name": "Database Connections Alert",
+        "datasource": "Prometheus",
+        "expr": "pg_stat_database_numbackends > 10",
+        "titleFormat": "Много соединений с БД",
+        "textFormat": "Активных соединений больше 10"
+      },
+      {
+        "name": "Low Cache Hit Alert",
+        "datasource": "Prometheus",
+        "expr": "pg_stat_database_blks_hit / (pg_stat_database_blks_hit + pg_stat_database_blks_read) * 100 < 90",
+        "titleFormat": "Низкий хит кэша БД",
+        "textFormat": "Коэффициент попадания в кэш ниже 90%"
+      },
+      {
+        "name": "Database Down Alert",
+        "datasource": "Prometheus",
+        "expr": "up{job=\"postgres_exporter\"} == 0",
+        "titleFormat": "БД недоступна",
+        "textFormat": "PostgreSQL экспортер не отвечает"
+      }
+    ]
+  },
+  "refresh": "5s",
+  "schemaVersion": 27,
+  "version": 1,
+  "links": []
+}

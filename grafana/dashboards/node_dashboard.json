@@ -1,0 +1,95 @@
+{
+  "id": null,
+  "uid": "node-dashboard",
+  "title": "Мониторинг Системы",
+  "tags": ["system", "node"],
+  "timezone": "browser",
+  "panels": [
+    {
+      "id": 1,
+      "title": "Загрузка CPU (%)",
+      "type": "graph",
+      "targets": [
+        {
+          "expr": "100 - (avg by (instance) (irate(node_cpu_seconds_total{mode=\"idle\"}[5m])) * 100)",
+          "legendFormat": "CPU"
+        }
+      ],
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0}
+    },
+    {
+      "id": 2,
+      "title": "Использование памяти (GB)",
+      "type": "graph",
+      "targets": [
+        {
+          "expr": "node_memory_MemTotal_bytes / 1024 / 1024 / 1024",
+          "legendFormat": "Total"
+        },
+        {
+          "expr": "node_memory_MemAvailable_bytes / 1024 / 1024 / 1024",
+          "legendFormat": "Available"
+        }
+      ],
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0}
+    },
+    {
+      "id": 3,
+      "title": "Загрузка системы (Load Average)",
+      "type": "gauge",
+      "targets": [
+        {
+          "expr": "node_load1",
+          "legendFormat": "Load 1m"
+        }
+      ],
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 8}
+    },
+    {
+      "id": 4,
+      "title": "Сеть: Прием (Mbit/s)",
+      "type": "barchart",
+      "targets": [
+        {
+          "expr": "rate(node_network_receive_bytes_total[5m]) * 8 / 1000000",
+          "legendFormat": "Прием"
+        }
+      ],
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 8}
+    }
+  ],
+  "time": {"from": "now-1h", "to": "now"},
+  "timepicker": {},
+  "templating": {
+    "list": []
+  },
+  "annotations": {
+    "list": [
+      {
+        "name": "High CPU Alert",
+        "datasource": "Prometheus",
+        "expr": "100 - (avg by (instance) (irate(node_cpu_seconds_total{mode=\"idle\"}[5m])) * 100) > 80",
+        "titleFormat": "Высокая загрузка CPU",
+        "textFormat": "Загрузка CPU выше 80%"
+      },
+      {
+        "name": "Low Memory Alert",
+        "datasource": "Prometheus",
+        "expr": "node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes < 0.1",
+        "titleFormat": "Низкий уровень памяти",
+        "textFormat": "Доступная память ниже 10%"
+      },
+      {
+        "name": "High Load Alert",
+        "datasource": "Prometheus",
+        "expr": "node_load1 > 2",
+        "titleFormat": "Высокая загрузка системы",
+        "textFormat": "Load Average выше 2"
+      }
+    ]
+  },
+  "refresh": "5s",
+  "schemaVersion": 27,
+  "version": 1,
+  "links": []
+}
